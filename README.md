@@ -70,7 +70,7 @@ end
 
 ## Developing
 
-**Note:** This package imports the GriddedFunctions.jl package as a submodule in the `GriddedFunctions` directory. If a feature of this package requires a change to the GriddedFunctions.jl package, the envisioned workflow is to
+**Note:** This package imports the GriddedFunctions.jl package as a submodule in the `deps/GriddedFunctions` directory. If a feature of this package requires a change to the GriddedFunctions.jl package, the envisioned workflow is to
 
 - update the original GriddedFunctions.jl package and push any changes made
 - check out the new version of the GriddedFunctions.jl package from GitHub into this repository.

@@ -81,7 +81,7 @@ version = "1.11.0"
 
 [[deps.GriddedFunctions]]
 deps = ["Interpolations"]
-path = "../GriddedFunctions"
+path = "../deps/GriddedFunctions"
 uuid = "15489a28-470a-4c47-be98-4174d0f03947"
 version = "0.1.0"
 

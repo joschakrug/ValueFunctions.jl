@@ -2,13 +2,13 @@
 
 julia_version = "1.12.5"
 manifest_format = "2.0"
-project_hash = "2153f1d65b9bb4cfb2c28ca096b81b42a4f8208c"
+project_hash = "a265b6a80f7a7200af5c7cfd21095f060a7b4de3"
 
 [[deps.Adapt]]
 deps = ["LinearAlgebra", "Requires"]
-git-tree-sha1 = "7e35fca2bdfba44d797c53dfe63a51fabf39bfc0"
+git-tree-sha1 = "35ea197a51ce46fcd01c4a44befce0578a1aaeca"
 uuid = "79e6a3ab-5dfb-504d-930d-738a2a938a0e"
-version = "4.4.0"
+version = "4.5.0"
 weakdeps = ["SparseArrays", "StaticArrays"]
 
     [deps.Adapt.extensions]
@@ -62,7 +62,7 @@ version = "1.11.0"
 
 [[deps.GriddedFunctions]]
 deps = ["Interpolations"]
-path = "GriddedFunctions"
+path = "deps/GriddedFunctions"
 uuid = "15489a28-470a-4c47-be98-4174d0f03947"
 version = "0.1.0"
 
@@ -206,6 +206,11 @@ version = "1.11.0"
 [[deps.Unicode]]
 uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 version = "1.11.0"
+
+[[deps.ValueFunctions]]
+path = "."
+uuid = "31c4d4ac-5a00-4604-9840-19cb78338d47"
+version = "0.1.0"
 
 [[deps.WoodburyMatrices]]
 deps = ["LinearAlgebra", "SparseArrays"]
