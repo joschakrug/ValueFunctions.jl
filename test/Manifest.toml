@@ -2,7 +2,7 @@
 
 julia_version = "1.12.5"
 manifest_format = "2.0"
-project_hash = "8eb0b5a677ae12c71b3b4807002d94cc03cac6a9"
+project_hash = "50450701645b8fdad3690a636ba50b2d7f0696ba"
 
 [[deps.Adapt]]
 deps = ["LinearAlgebra", "Requires"]
@@ -310,8 +310,8 @@ version = "1.11.0"
 uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 version = "1.11.0"
 
-[[deps.ValueFunctionIteration]]
-deps = ["GriddedFunctions", "Interpolations"]
+[[deps.ValueFunctions]]
+deps = ["GriddedFunctions"]
 path = ".."
 uuid = "31c4d4ac-5a00-4604-9840-19cb78338d47"
 version = "0.1.0"
