@@ -46,7 +46,7 @@ struct CapParams
     A::Float64
 end
 
-function ValueFunctions.nextstate(::CapState, a::CapAction, ::Environment)
+function ValueFunctions.nextstate(a::CapAction, ::CapState, ::Environment)
     CapState(a.kp)
 end
 

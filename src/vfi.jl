@@ -1,5 +1,5 @@
 """
-    nextstate(s::State, a::Action, e::Environment)
+    nextstate(a::Action, s::State, e::Environment)
 
 Return the next-period state given current state `s`, action `a` and environment
 `e`.

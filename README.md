@@ -41,7 +41,7 @@ by iterating the Bellman operator until convergence:
 
 ```julia
 # Capital dynamics: k' = (1 − δ)·k + i, with 10% depreciation
-function ValueFunctions.nextstate(s::FirmState, a::FirmAction, ::Environment)
+function ValueFunctions.nextstate(a::FirmAction, s::FirmState, ::Environment)
     FirmState(0.9 * s.k + a.i)
 end
 
@@ -54,7 +54,7 @@ function ValueFunctions.actionvalue(a::FirmAction, s::FirmState, V_itp, e::Envir
     (0.0 < q ≤ s.k && i ≥ 0.0) || return -Inf
 
     revenue = A * q^((σ - 1) / σ)
-    revenue - i + β * V_itp(nextstate(s, a, e))
+    revenue - i + β * V_itp(nextstate(a, s, e))
 end
 
 # Zero initial value function
