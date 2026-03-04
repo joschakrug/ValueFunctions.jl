@@ -114,6 +114,6 @@ actiongrid(e::Environment) = e.actiongrid
 stategrid(e::Environment) = e.stategrid
 parameters(e::Environment) = e.params
 
-function GriddedFunctions.Grid(T::Type{<: Action}; named_axes...)
+function GriddedFunctions.Grid(T::Type{<: Variable}; named_axes...)
     Grid(T, Tuple(named_axes[name] for name in fieldnames(T))...)
 end
