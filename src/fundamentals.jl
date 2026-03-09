@@ -16,6 +16,8 @@ See also: [`State`](@ref), [`Action`](@ref).
 """
 abstract type Variable end
 
+GriddedFunctions.dimnames(::Type{V}) where V <: Variable = fieldnames(V)
+
 """
     State
 
@@ -65,7 +67,7 @@ abstract type Action <: Variable end
 
 ### implement full named-tuple like behaviour for Variable subtypes (State, Action)
 
-(::Type{VType})(iter) where {VType <: Variable} = VType(iter...)
+# (::Type{VType})(iter) where {VType <: Variable} = VType(iter...)
 
 Base.length(x::Variable)     = nfields(x)
 Base.firstindex(x::Variable) = 1
@@ -90,6 +92,9 @@ function Base.eltype(::Type{T}) where {T <: Variable}
     return promote_type(ft...)
 end
 
+Base.convert(::Type{T}, t::Tuple) where T <: Variable = T(t...)
+
+
 """
     Environment{P, AG <: ActionGrid, SG <: StateGrid}
 
@@ -104,7 +109,7 @@ parameters, an action grid, and a state grid.
 
 See also: [`ActionGrid`](@ref), [`StateGrid`](@ref).
 """
-struct Environment{P, AG <: Grid{<:Action}, SG <: Grid{<:State}}
+struct Environment{P, AG <: AbstractGrid{<:Action}, SG <: AbstractGrid{<:State}}
     params::P
     actiongrid::AG
     stategrid::SG
@@ -113,7 +118,3 @@ end
 actiongrid(e::Environment) = e.actiongrid
 stategrid(e::Environment) = e.stategrid
 parameters(e::Environment) = e.params
-
-function GriddedFunctions.Grid(T::Type{<: Variable}; named_axes...)
-    Grid(T, Tuple(named_axes[name] for name in fieldnames(T))...)
-end

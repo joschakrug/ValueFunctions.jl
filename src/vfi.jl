@@ -34,17 +34,17 @@ function to determine the value of each possible action. It can be overwritten
 with a custom optimisation algorithm for user implementations of `Action` and
 `State` if the structure of the dynamic control problem allows for it.
 """
-function value!(objective::GriddedFunction{<:Action}, s::State, V_itp::GFInterpolation, e::Environment)
-    xmap!(a -> actionvalue(a, s, V_itp, e), objective)
+function value!(objective::AbstractGriddedFunction, s::State, V_itp::GFInterpolation, e::Environment)
+    argmap!(a -> actionvalue(a, s, V_itp, e), objective)
     first(findmax(objective))
 end
 
 """
     value(s::State, V_itp::GFInterpolation, e::Environment)
 
-Like [`value!`](@ref) but allocates a new `objective::GriddedFunction{Action}`
-under the hood. This does not matter for a single call but drastically reduces
-performance under repeated calls.
+Like [`value!`](@ref) but allocates a new `objective::GriddedFunction` over the
+action space under the hood. This does not matter for a single call but
+drastically reduces performance under repeated calls.
 """ 
 function value(s::State, V_itp::GFInterpolation, e::Environment)
     objective = GriddedFunction(Float64, actiongrid(e), undef)
@@ -67,7 +67,7 @@ respective user implementations of `Action` and `State`.
 If the structure of the problem allows for a more efficient solution algorithm
 than grid search, this method can be overridden.
 """
-function bellman(V::GriddedFunction{<:State}, e::Environment)
+function bellman(V::AbstractGriddedFunction, e::Environment)
 
     V_itp = interpolate(V)
 
@@ -75,5 +75,5 @@ function bellman(V::GriddedFunction{<:State}, e::Environment)
     # (this is just to allocate the array, it will be re-filled at every
     # iteration over each point on the state grid)
     objective = GriddedFunction(Float64, actiongrid(e), undef)
-    xmap(state -> value!(objective, state, V_itp, e), V)
+    argmap(state -> value!(objective, state, V_itp, e), V)
 end

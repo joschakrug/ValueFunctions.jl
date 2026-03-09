@@ -96,7 +96,6 @@ end
     end
 
     @testset "Variable interface — mixed-type eltype" begin
-        # promote_type(Int, Float64) == Float64
         @test eltype(MixedFieldAction) == Float64
     end
 
@@ -164,8 +163,8 @@ end
         @test V_log[1]   ≈ log(0.1)
         @test V_log[end] ≈ log(2.0)
 
-        # in-place xmap! over grid points
-        xmap!(state -> state.k^2, V0)
+        # in-place argmap! over grid points
+        argmap!(state -> state.k^2, V0)
         @test V0[1]   ≈ 0.1^2
         @test V0[end] ≈ 2.0^2
     end
