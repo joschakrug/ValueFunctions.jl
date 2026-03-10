@@ -52,6 +52,6 @@ include("vfi.jl")
 
 export Action, State, Environment
 export stategrid, actiongrid
-export nextstate, actionvalue, value, value!, bellman
+export nextstate, actionvalue, optimalvalue, optimalvalue!, bellman
 
 end
