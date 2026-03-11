@@ -52,7 +52,7 @@ function optimalvalue(s::State, V_itp::GFInterpolation, e::Environment)
 end
 
 """
-    bellman(V::AbstractGriddedFunction, e::Environment)
+    bellman(V::AbstractGriddedFunction, e::Environment; parallel = true)
 
 Return the updated value function conditional on initial value function
 (when solving a value function iteration problem) or next-period value
@@ -60,29 +60,36 @@ function (when solving an optimal path by backward induction from a terminal
 value) `V`, and conditional on state of the environment `e`.
 
 In its default implementation, this method efficiently iterates over the state
-space (using parallel threads) and calls the [`optimalvalue!`](@ref) function
+space (using parallel threads if `parallel = true`) and calls the [`optimalvalue!`](@ref) function
 to determine the optimal value conditional on the current state.
 
 If the structure of the dynamic problem allows for a more efficient approach,
 or if heavy lifting using the GPU is required, this method can be overloaded
 correspondingly.
 """
-function bellman(V::AbstractGriddedFunction, e::Environment)
+function bellman(V::AbstractGriddedFunction, e::Environment; parallel = true)
 
     V_itp = interpolate(V)
     states = grid(V)
     V_new = similar(V)
 
-    AG = typeof(actiongrid(e))
-    OT = GriddedFunction{Float64, ndims(AG), AG}
+    if parallel
+        AG = typeof(actiongrid(e))
+        OT = GriddedFunction{Float64, ndims(AG), AG}
 
-    let pool = Channel{OT}(Threads.nthreads())
-        foreach(_ -> put!(pool, GriddedFunction(Float64, actiongrid(e), undef)), 1:Threads.nthreads())
+        let pool = Channel{OT}(Threads.nthreads())
+            foreach(_ -> put!(pool, GriddedFunction(Float64, actiongrid(e), undef)), 1:Threads.nthreads())
 
-        Threads.@threads for I in eachindex(V)
-            current_objective = take!(pool)
-            V_new[I] = optimalvalue!(current_objective, states[I], V_itp, e)
-            put!(pool, current_objective)
+            Threads.@threads for I in eachindex(V)
+                current_objective = take!(pool)
+                V_new[I] = optimalvalue!(current_objective, states[I], V_itp, e)
+                put!(pool, current_objective)
+            end
+        end
+    else
+        objective = GriddedFunction(Float64, actiongrid(e), undef)
+        for I in eachindex(V)
+            V_new[I] = optimalvalue!(objective, states[I], V_itp, e)
         end
     end
 
