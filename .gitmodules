@@ -1,3 +1,0 @@
-[submodule "GriddedFunctions"]
-	path = deps/GriddedFunctions
-	url = https://github.com/joschakrug/GriddedFunctions.jl
