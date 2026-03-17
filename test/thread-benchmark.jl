@@ -3,10 +3,10 @@
 # Benchmarks the bellman operator with however many threads Julia was started with.
 # Run with different thread counts to compare performance:
 #
-#   julia --threads 1    test/thread-benchmark.jl
-#   julia --threads 2    test/thread-benchmark.jl
-#   julia --threads 4    test/thread-benchmark.jl
-#   julia --threads auto test/thread-benchmark.jl
+#   julia --threads 1    --project=test test/thread-benchmark.jl
+#   julia --threads 2    --project=test test/thread-benchmark.jl
+#   julia --threads 4    --project=test test/thread-benchmark.jl
+#   julia --threads auto --project=test test/thread-benchmark.jl
 #
 # You must restart Julia to change the thread count.
 
@@ -82,7 +82,7 @@ println("Timing $N_ITERS bellman iterations...")
 stats = @timed begin
     Vn = V0
     for _ in 1:N_ITERS
-        global Vn = bellman(Vn, env)
+        global Vn = first(bellman(Vn, env))
     end
     Vn
 end

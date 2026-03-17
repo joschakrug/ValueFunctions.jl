@@ -223,9 +223,9 @@ end
 
         tol, max_iter = 1e-6, 3000
         for _ in 1:max_iter
-            Vn_new = bellman(Vn, env)
-            dist   = maximum(abs(a - b) for (a, b) in zip(Vn_new, Vn))
-            Vn     = Vn_new
+            Vn_new, policy = bellman(Vn, env)
+            dist           = maximum(abs(a - b) for (a, b) in zip(Vn_new, Vn))
+            Vn             = Vn_new
             dist < tol && break
         end
 
