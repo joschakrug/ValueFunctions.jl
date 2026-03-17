@@ -5,3 +5,6 @@ authors = ["Joscha Krug <joscha.krug@proton.me>"]
 
 [deps]
 GriddedFunctions = "15489a28-470a-4c47-be98-4174d0f03947"
+
+[compat]
+GriddedFunctions = "0.1.0"

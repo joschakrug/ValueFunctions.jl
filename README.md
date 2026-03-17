@@ -68,11 +68,31 @@ for _ in 1:2000
 end
 ```
 
-## Developing
+## Installation
 
-**Note:** This package imports the GriddedFunctions.jl package as a submodule in the `deps/GriddedFunctions` directory. If a feature of this package requires a change to the GriddedFunctions.jl package, the envisioned workflow is to
+Installation
 
-- update the original GriddedFunctions.jl package and push any changes made
-- check out the new version of the GriddedFunctions.jl package from GitHub into this repository.
+To install the latest stable version, add the [LocalJuliaRepo](https://github.com/joschakrug/LocalJuliaRepo) to your Julia registries by running
 
-See the [git-scm.com handbook section on submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) for more details.
+```julia
+Pkg.Registry.add(RegistrySpec(url="git@github.com:joschakrug/LocalJuliaRepo.git"))
+```
+
+in your REPL. With this registry added, you can simply `] add` and `] update` the ValueFunctions package using your package manager.
+
+To install the latest development version, clone this git repository to a local folder and add that folder to your main project as a development dependency running `] dev local/repo/path`. Bear in mind that this package depends on [GriddedFunctions.jl](https://github.com/joschakrug/GriddedFunctions.jl) which is not yet available in Julia's General registry. That means you will have to add the `LocalJuliaRepo` in any case, even if you just want to use the development version.
+
+## For developers
+
+### Testing
+
+Testing is as simple as running `] test ValueFunctions` with the `test` environment activated. Manual tests in the `test` folder require the `test` environment to be activated as well.
+
+### Pushing updated versions
+
+To push an updated package version to the `LocalJuliaRepo`, bump the version number in the `Project.toml`, push a tagged commit with the same version number to GitHub and then run
+
+```julia
+julia> using LocalRegistry
+julia> register("/path/to/local/copy/of/project", registry = "LocalJuliaRepo", push = true)
+```

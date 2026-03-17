@@ -2,7 +2,7 @@
 
 julia_version = "1.12.5"
 manifest_format = "2.0"
-project_hash = "a265b6a80f7a7200af5c7cfd21095f060a7b4de3"
+project_hash = "9bbd95b0d6f617cfdebaddd76e73c1bc59a7c9e9"
 
 [[deps.Adapt]]
 deps = ["LinearAlgebra", "Requires"]
@@ -62,9 +62,15 @@ version = "1.11.0"
 
 [[deps.GriddedFunctions]]
 deps = ["Interpolations"]
-path = "deps/GriddedFunctions"
+git-tree-sha1 = "452fb1a327e5b2b37f25f22b3cda6c83ad623fef"
 uuid = "15489a28-470a-4c47-be98-4174d0f03947"
 version = "0.1.0"
+
+    [deps.GriddedFunctions.extensions]
+    GriddedFunctionPlotsExt = "RecipesBase"
+
+    [deps.GriddedFunctions.weakdeps]
+    RecipesBase = "3cdcf5f2-1ef4-517c-9805-6587b60abb01"
 
 [[deps.Interpolations]]
 deps = ["Adapt", "AxisAlgorithms", "ChainRulesCore", "LinearAlgebra", "OffsetArrays", "Random", "Ratios", "SharedArrays", "SparseArrays", "StaticArrays", "WoodburyMatrices"]
@@ -171,9 +177,9 @@ version = "1.12.0"
 
 [[deps.StaticArrays]]
 deps = ["LinearAlgebra", "PrecompileTools", "Random", "StaticArraysCore"]
-git-tree-sha1 = "0f529006004a8be48f1be25f3451186579392d47"
+git-tree-sha1 = "246a8bb2e6667f832eea063c3a56aef96429a3db"
 uuid = "90137ffa-7385-5640-81b9-e52037218182"
-version = "1.9.17"
+version = "1.9.18"
 
     [deps.StaticArrays.extensions]
     StaticArraysChainRulesCoreExt = "ChainRulesCore"
