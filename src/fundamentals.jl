@@ -67,8 +67,6 @@ abstract type Action <: Variable end
 
 ### implement full named-tuple like behaviour for Variable subtypes (State, Action)
 
-# (::Type{VType})(iter) where {VType <: Variable} = VType(iter...)
-
 Base.length(x::Variable)     = nfields(x)
 Base.firstindex(x::Variable) = 1
 Base.lastindex(x::Variable)  = nfields(x)
@@ -118,3 +116,13 @@ end
 actiongrid(e::Environment) = e.actiongrid
 stategrid(e::Environment) = e.stategrid
 parameters(e::Environment) = e.params
+
+function Base.show(io::IO, e::Environment)
+    print(io, "Environment(")
+    show(io, e.params)
+    print(io, ", ")
+    show(io, e.actiongrid)
+    print(io, ", ")
+    show(io, e.stategrid)
+    print(io, ")")
+end
