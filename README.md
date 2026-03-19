@@ -96,3 +96,8 @@ To register an updated package version in `JuliaRegistryJKG`, bump the version n
 julia> using LocalRegistry
 julia> register("/path/to/local/copy/of/project", registry = "JuliaRegistryJKG", push = true)
 ```
+
+### Managing parallel changes in package and dependencies
+
+- Add most recent development version of `GriddedFunctions` locally via `] dev` (which overwrites the most recent stable versions from `JuliaRegistryJKG`).
+- Whenever you want to log in a replicable state of this package, update the `GriddedFunctions` package versions in `JuliaRegistryJKG`. Remove the `] dev` dependencies and `] update`. Test if everything still works and push tagged commit to GitHub.
