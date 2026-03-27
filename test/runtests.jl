@@ -159,7 +159,7 @@ end
         @test all(==(0.0), V0)
 
         # function of the continuous coordinate
-        V_log = GriddedFunction(Float64, sg, k -> log(k))
+        V_log = GriddedFunction(Float64, sg, k -> log(k.k))
         @test V_log[1]   ≈ log(0.1)
         @test V_log[end] ≈ log(2.0)
 
@@ -171,7 +171,7 @@ end
 
     @testset "GriddedFunction over State grid — points" begin
         sg    = Grid(SimpleState, LinearAxis(range(0.1, 2.0; length=10)))
-        V_log = GriddedFunction(Float64, sg, k -> log(k))
+        V_log = GriddedFunction(Float64, sg, k -> log(k.k))
 
         ps = collect(points(V_log))
         @test length(ps) == 10
@@ -186,7 +186,7 @@ end
 
     @testset "Interpolation over State grid" begin
         sg    = Grid(SimpleState, LinearAxis(range(0.1, 2.0; length=200)))
-        V_log = GriddedFunction(Float64, sg, k -> log(k))
+        V_log = GriddedFunction(Float64, sg, k -> log(k.k))
         V_itp = interpolate(V_log)
 
         @test V_itp isa GFInterpolation

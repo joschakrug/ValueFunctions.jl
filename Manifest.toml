@@ -62,9 +62,9 @@ version = "1.11.0"
 
 [[deps.GriddedFunctions]]
 deps = ["Interpolations"]
-path = "/Users/joschakrug/Documents/Coding/GriddedFunctions/"
+git-tree-sha1 = "60cd095d69c9a705481969f346319e8ededbac03"
 uuid = "15489a28-470a-4c47-be98-4174d0f03947"
-version = "0.1.0"
+version = "0.1.1"
 
     [deps.GriddedFunctions.extensions]
     GriddedFunctionPlotsExt = "RecipesBase"
